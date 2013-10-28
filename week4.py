@@ -34,15 +34,27 @@ class PaddingOracle(object):
                 return True # good padding
             return False # bad padding
 c0 = "f20bdba6ff29eed7b046d1df9fb7000058b1ffb4210a580f748b4ac714c001bd4a61044426fb515dad3f21f18aa577c0bdf302936266926ff37dbf7035d5eeb4"
+c = c0[32:]
+print len(c)
 IV = c0[0:32]
+padxor =   "00000000000000000000000000000001"
+
+print len(padxor)
 querystr = "testc"
 po = PaddingOracle()
 
 
 for i in range(0,255,1):
-    querystr = IV + chr(i).encode('hex')
+    g = "000000000000000000000000000000"
+    g = g + chr(i).encode('hex')
+    print guessxor
+    cprime = strxor(strxor(g , padxor) , c)
+    
+    querystr = IV + cprime
     #print querystr
     if po.query(querystr):
         print "404!"
         print querystr
+
+
 
